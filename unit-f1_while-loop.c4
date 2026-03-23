@@ -1,0 +1,39 @@
+// Test Case F1: This testcase demonstrates the capability of C4Chinese to handle event-controlled loops in the form of while statements.
+
+hao main(){
+
+    hao counter;
+
+    // While statements can be performed with the syntax below...
+    counter = 3;
+    buduanruguo (counter != 0) {        // while (counter != 0)
+        counter = counter - 1;
+        geini(counter);
+    }
+    geini("");
+
+    // When a break statement is called in a loop, it
+    // exits the loop prematurely...
+    counter = 5;
+    buduanruguo (counter != 0) {        // while (counter != 0)
+        counter = counter - 1;
+        ruguo(counter == 2){
+            ting;                       // break;
+        }
+        geini(counter);
+    }
+    geini("");
+
+    // When a continue statement is called in a loop, it
+    // skips to the next iteration immediately...
+    counter = 5;
+    buduanruguo (counter != 0) {        // while (counter != 0)
+        counter = counter - 1;          
+        ruguo(counter == 3){    
+            buting;                     // continue;
+        }
+        geini(counter);
+    }
+
+    huijia 0;
+}

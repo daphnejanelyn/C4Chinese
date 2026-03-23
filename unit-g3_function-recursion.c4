@@ -1,0 +1,22 @@
+// Test Case G3: This testcase demonstrates C4Chinese's ability to handle functions with recursive properties.
+
+// Here, we set up a recursive function that returns the x-th fibonacci number...
+hao fib(hao x){
+    ruguo (x < 1){
+        huijia 0;
+    }
+    xiayigeruguo (x < 3) {
+        huijia 1;
+    }
+    xiayige {
+        huijia fib(x - 1) + fib(x - 2);
+    }
+}
+
+hao main(){
+    
+    // Let's try to get the 7th fibonacci number...
+    geini(fib(7));
+
+    huijia 0;
+}

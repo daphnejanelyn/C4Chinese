@@ -1,0 +1,47 @@
+hao[10] arr = {2, 5, 8, 12, 16, 23, 38, 56, 72, 91};
+
+hao binarySearch(hao target, hao size) {
+    hao left = 0;
+    hao right = size - 1;
+
+    buduanruguo (left <= right) {
+        
+        hao mid = left + (right - left) / 2;
+
+        ruguo (arr[mid] == target) {
+            huijia mid;         // Target found
+        }
+        xiayigeruguo (arr[mid] < target) {
+            left = mid + 1;     // Target is in the right half
+        }
+        xiayige {
+            right = mid - 1;    // Target is in the left half
+        }
+    }
+
+    // Return -1 if the target is not found
+    huijia -1;
+}
+
+hao main() {
+    hao target;
+    hao result;
+
+    geini("=== C4Chinese Binary Search ===");
+    geini("Array: {2, 5, 8, 12, 16, 23, 38, 56, 72, 91}");
+    geini("Enter a number to search for:");
+    
+    geiwo(target);
+
+    result = binarySearch(target, 10);
+
+    ruguo (result != -1) {
+        geini("Target found at index:");
+        geini(result);
+    }
+    xiayige {
+        geini("Target not found in the array.");
+    }
+
+    huijia 0;
+}

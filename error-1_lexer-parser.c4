@@ -1,0 +1,41 @@
+// Error Case 1: This file includes samples of lexical and parser errors, as well as demonstrating how the lexer and parser are able to respond to each error to continue processing the rest of the file.
+
+hao main(){
+    
+    // LEXER ERROR: Identifiers cannot start with a digit...
+    hao 123int = 10;
+
+    // LEXER ERROR: Identifiers cannot start with '_'...
+    erhao _pi = 3.14;
+
+    // LEXER ERROR: Unclosed character literals...
+    pinyin letter = 'C;
+    
+    // LEXER ERROR: Invalid character literals...
+    pinyin letter1 = 'CDEF';
+
+    // LEXER ERROR: Unclosed string literals...
+    duopinyin greeting = "NiHao;
+
+    // LEXER ERROR: Random extraneous tokens...
+    hao counter;
+    hao counter123;
+    @counter = counter + 5;         // ADD (+)
+    $counter = counter - 2;         // SUB (-)
+    #counter = counter * 2;         // MULT (*)
+    counter$123 = counter / 2;      // DIV (/)
+
+    // PARSER ERROR: Missing semicolon...
+    geini("This should report")
+    geini("as an error!");
+
+
+    // ERROR: Unterminated multi-line comment...
+    /*
+    Line 1
+    Line 2
+    Line 3
+    Line 4.0
+
+    huijia 0;
+}

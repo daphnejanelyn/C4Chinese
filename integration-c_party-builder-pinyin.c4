@@ -1,0 +1,58 @@
+yinyue Stats {
+    hao[3] attributes;
+};
+
+yinyue Character {
+    hao id;
+    Stats stats;
+};
+
+gan buffStat(hao^ statPtr, hao bonus) {
+    ^statPtr shi ^statPtr jia bonus;
+}
+
+hao main() {
+    Character[2] party;
+    
+    party[0].id shi 101;
+    party[1].id shi 202;
+
+    geini("=== Character Setup ===");
+    
+    buduan (hao i shi 0; i xiao 2; i shi i jia 1) {
+        geini("Enter HP, ATK, and DEF for Character ID: " jia party[i].id);
+        buduan (hao j shi 0; j xiao 3; j shi j jia 1) {
+            geiwo(party[i].stats.attributes[j]);
+        }
+        geini("");
+    }
+
+    geini("Enter an ATK buff for Character 101:");
+    hao buff;
+    geiwo(buff);
+    geini("");
+
+    hao^ atkPtr shi &party[0].stats.attributes[1];
+    buffStat(atkPtr, buff);
+
+    geini("Enter a completely new DEF value for Character 202:");
+    hao^ defPtr shi &party[1].stats.attributes[2];
+    geiwo(^defPtr);
+    geini("");
+
+    geini("=== Final Party Stats ===");
+    buduan (hao i shi 0; i xiao 2; i shi i jia 1) {
+        geini("Char ID:");
+        geini(party[i].id);
+        geini("HP:");
+        geini(party[i].stats.attributes);
+        geini("ATK:");
+        geini(party[i].stats.attributes[1]);
+        geini("DEF:");
+        geini(party[i].stats.attributes[2]);
+        geini("---");
+        geini("");
+    }
+
+    huijia 0;
+}

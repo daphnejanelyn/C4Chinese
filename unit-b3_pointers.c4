@@ -1,0 +1,24 @@
+// Test Case B3: This testcase demonstrates the capabilies of C4Chinese in handling pointers and dereferences.
+
+hao main(){
+
+  // A pointer can be declared as seen below...
+  hao myInt = 5;
+  hao^ myIntPtr = &myInt;
+
+  // The value of the myIntPtr is the address at which the value of myInt is stored in the internal memory.
+  geini(myIntPtr);
+
+  // The pointer can be dereferenced as follows...
+  hao myIntDeref = ^myIntPtr;
+  geini(myIntDeref);
+
+  // Finally, pointers to other pointers can also be used and dereferenced themselves...
+  hao myInt2 = 8;
+  hao^ myIntPtr2 = &myInt2;
+  hao^^ myIntPtrPtr2 = &myIntPtr2;
+
+  geini(^^myIntPtrPtr2); 
+
+  huijia 0;
+}
