@@ -206,7 +206,7 @@ class CodeEditor(QPlainTextEdit):
 class C4ChineseIDE(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("C4Chinese IDE & Debugger")
+        self.setWindowTitle("Henhao IDE: The C4Chinese IDE & Debugger")
         self.setGeometry(100, 100, 1200, 800)
         
         self.current_file = None
