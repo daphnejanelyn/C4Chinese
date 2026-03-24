@@ -16,3 +16,7 @@ C4ChineseParserVisitor.py
 
 *.tokens
 *.interp
+.antlr/
+
+temp_run.c4
+temp_debug.c4
