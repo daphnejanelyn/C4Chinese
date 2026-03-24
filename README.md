@@ -2,6 +2,10 @@
 
 Welcome to **C4Chinese**, a custom programming language designed with a Chinese-based syntax. This project includes a full compilation pipeline (Lexer, Parser, Semantic Checker, Optimizer, Interpreter) and a custom IDE built specifically to make writing and debugging C4Chinese code a seamless experience.
 
+## Documentation
+For a comprehensive breakdown of the language, covering all of its features and various implementation details, the programmer can review the full specifications here:
+* [C4Chinese Official Documentation](https://drive.google.com/drive/folders/1CZIQtueXk7yj0555wHDrL-Sx0qK1PWTX?usp=sharing)
+
 ---
 
 ## Getting Started
