@@ -29,8 +29,9 @@ hao main(){
     // arise if the calling scope has the same variable identfiers
     // as the callee scope...
     hao myInt = 1;
-    hao myInt2 = 2;
+    hao myInt2 = myInt + 3;
     printPlusOne(6);
+    geini(myInt2);
 
     huijia 0;
 }

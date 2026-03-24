@@ -240,21 +240,7 @@ class InterpreterVisitor(C4ChineseParserVisitor):
 
             # Flatten multi-dimensional arrays into 1D memory
             if isinstance(val, list):
-                
-                # Helper to recursively flatten any nested list
-                def flatten(nested_list):
-                    flat = []
-                    for item in nested_list:
-                        if isinstance(item, list):
-                            flat.extend(flatten(item))
-                        else:
-                            flat.append(item)
-                    return flat
-                    
-                flat_val = flatten(val)
-                for i, item_val in enumerate(flat_val):
-                    self.memory.write(base_address + i, item_val)
-                    
+                self._write_array_to_memory(base_address, val, var_sym.type)
             else:
                 self.memory.write(base_address, val)
                 
@@ -298,22 +284,8 @@ class InterpreterVisitor(C4ChineseParserVisitor):
             val = self.visit(ctx.expression())
             self.trace(f"Assigning constant value {val} to {name} at address {base_address}")
             
-            # Flatten multi-dimensional arrays into 1D memory
             if isinstance(val, list):
-                
-                def flatten(nested_list):
-                    flat = []
-                    for item in nested_list:
-                        if isinstance(item, list):
-                            flat.extend(flatten(item))
-                        else:
-                            flat.append(item)
-                    return flat
-                    
-                flat_val = flatten(val)
-                for i, item_val in enumerate(flat_val):
-                    self.memory.write(base_address + i, item_val)
-                    
+                self._write_array_to_memory(base_address, val, var_sym.type)
             else:
                 self.memory.write(base_address, val)
                 
@@ -1281,6 +1253,28 @@ class InterpreterVisitor(C4ChineseParserVisitor):
         elif ctx.deRefVal():
             base_type = self.get_deref_type(ctx.deRefVal())
             return base_type.base_type if hasattr(base_type, 'base_type') else base_type
+
+    def _write_array_to_memory(self, base_address, val_list, array_type):
+        if not getattr(array_type, 'base_type', None):
+            return
+            
+        element_type = array_type.base_type
+        element_size = TypeManager.get_size(element_type)
+        
+        for i in range(array_type.size):
+            current_addr = base_address + (i * element_size)
+            
+            # If the user provided a value for this index in the literal...
+            if i < len(val_list):
+                item_val = val_list[i]
+                
+                if isinstance(element_type, ArrayType):
+                    # It's a nested array, recurse...
+                    if isinstance(item_val, list):
+                        self._write_array_to_memory(current_addr, item_val, element_type)
+                else:
+                    # It's a primitive/struct, write it...
+                    self.memory.write(current_addr, item_val)
 
 class TypeManager:
     @staticmethod

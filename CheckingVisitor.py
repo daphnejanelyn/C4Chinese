@@ -395,18 +395,37 @@ class CheckingVisitor(C4ChineseParserVisitor):
         if not element_types:
             return ArrayType(base_type=TypeSymbol("unknown"), size=0)
             
-        # 3. Enforce that all elements are exactly the same type...
+        # 3. Check types and find the maximum inner size for nested arrays...
         first_type = element_types[0]
-        first_name = getattr(first_type, 'name', str(first_type)) if first_type else "unknown"
+        is_nested = isinstance(first_type, ArrayType)
+        max_inner_size = first_type.size if is_nested else 0
         
         for i, t in enumerate(element_types):
-            t_name = getattr(t, 'name', str(t)) if t else "unknown"
-            if t_name != first_name:
-                self.semanticError(ctx, f"Array initialization contains mismatched types: expected '{first_name}', found '{t_name}' at index {i}.")
-                return None
+            if is_nested:
+                # Ensure the deepest base type matches (e.g. 'int' == 'int')...
+                if not isinstance(t, ArrayType) or t.base_type.name != first_type.base_type.name:
+                    expected = first_type.base_type.name if hasattr(first_type, 'base_type') else "unknown"
+                    found = t.base_type.name if isinstance(t, ArrayType) else getattr(t, 'name', 'unknown')
+                    self.semanticError(ctx, f"Array initialization contains mismatched types: expected base '{expected}', found '{found}' at index {i}.")
+                    return None
                 
-        # 4. Return the bundled ArrayType with its calculated size...
-        return ArrayType(base_type=first_type, size=len(element_types))
+                # Track the largest inner array...
+                if t.size > max_inner_size:
+                    max_inner_size = t.size
+            else:
+                t_name = getattr(t, 'name', str(t)) if t else "unknown"
+                first_name = getattr(first_type, 'name', str(first_type)) if first_type else "unknown"
+                if t_name != first_name:
+                    self.semanticError(ctx, f"Array initialization contains mismatched types: expected '{first_name}', found '{t_name}' at index {i}.")
+                    return None
+                
+        # 4. Return the bundled ArrayType...
+        if is_nested:
+            # Promote all inner arrays to the max inner size found so the type validates correctly...
+            uniform_base = ArrayType(base_type=first_type.base_type, size=max_inner_size)
+            return ArrayType(base_type=uniform_base, size=len(element_types))
+        else:
+            return ArrayType(base_type=first_type, size=len(element_types))
 
     def visitExpList(self, ctx: C4ChineseParser.ExpListContext):
         # Collect and return a list of evaluated expression types
@@ -435,13 +454,25 @@ class CheckingVisitor(C4ChineseParserVisitor):
             
             # Array handling
             if isinstance(data_type, ArrayType) and isinstance(expr_type, ArrayType):
-                # 1. Base types must match (e.g., both must be 'int')
-                if data_type.base_type.name != expr_type.base_type.name:
-                    self.semanticError(ctx, f"Cannot assign array of '{expr_type.base_type.name}' to array of '{data_type.base_type.name}'.")
+                current_data = data_type
+                current_expr = expr_type
+                is_valid = True
                 
-                # 2. Expression size must be <= declared size
-                elif expr_type.size > data_type.size:
-                    self.semanticError(ctx, f"Array initializer size ({expr_type.size}) exceeds declared array size ({data_type.size}).")
+                # Unwrap multi-dimensional arrays to check sizes layer by layer
+                while isinstance(current_data, ArrayType) and isinstance(current_expr, ArrayType):
+                    if current_expr.size > current_data.size:
+                        self.semanticError(ctx, f"Array initializer size ({current_expr.size}) exceeds declared array size ({current_data.size}).")
+                        is_valid = False
+                        break
+                    current_data = current_data.base_type
+                    current_expr = current_expr.base_type
+                    
+                # Ensure the final underlying primitive types match
+                if is_valid:
+                    data_base_name = getattr(current_data, 'name', str(current_data))
+                    expr_base_name = getattr(current_expr, 'name', str(current_expr))
+                    if data_base_name != expr_base_name:
+                        self.semanticError(ctx, f"Cannot assign array of '{expr_base_name}' to array of '{data_base_name}'.")
                     
             # Not array
             else:
@@ -485,13 +516,29 @@ class CheckingVisitor(C4ChineseParserVisitor):
         self.symbol_table.define(var_sym)        
         return None
     
+    # Helper function to run type-checking on any assignment.
     def check_assignment_types(self, ctx, lhs_text, var_sym, lhs_type, rhs_type):
-        """Helper function to run type-checking on any assignment."""
         if isinstance(lhs_type, ArrayType) and isinstance(rhs_type, ArrayType):
-            if lhs_type.base_type.name != rhs_type.base_type.name:
-                self.semanticError(ctx, f"Cannot assign array of '{rhs_type.base_type.name}' to array of '{lhs_type.base_type.name}'.")
-            elif rhs_type.size > lhs_type.size:
-                self.semanticError(ctx, f"Assigned array size ({rhs_type.size}) exceeds target array size ({lhs_type.size}).")
+            current_lhs = lhs_type
+            current_rhs = rhs_type
+            is_valid = True
+            
+            # Unwrap multi-dimensional arrays to check sizes layer by layer
+            while isinstance(current_lhs, ArrayType) and isinstance(current_rhs, ArrayType):
+                if current_rhs.size > current_lhs.size:
+                    self.semanticError(ctx, f"Assigned array size ({current_rhs.size}) exceeds target array size ({current_lhs.size}).")
+                    is_valid = False
+                    break
+                current_lhs = current_lhs.base_type
+                current_rhs = current_rhs.base_type
+                
+            # Ensure the final underlying primitive types match
+            if is_valid:
+                lhs_base_name = getattr(current_lhs, 'name', str(current_lhs))
+                rhs_base_name = getattr(current_rhs, 'name', str(current_rhs))
+                if lhs_base_name != rhs_base_name:
+                    self.semanticError(ctx, f"Cannot assign array of '{rhs_base_name}' to array of '{lhs_base_name}'.")
+                    
         elif isinstance(lhs_type, ArrayType) or isinstance(rhs_type, ArrayType):
             lhs_name = getattr(lhs_type, 'name', str(lhs_type)) if lhs_type else "unknown"
             rhs_name = getattr(rhs_type, 'name', str(rhs_type)) if rhs_type else "unknown"
