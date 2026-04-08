@@ -4,7 +4,7 @@ Welcome to **C4Chinese**, a custom programming language designed with a Chinese-
 
 ## Documentation
 For a comprehensive breakdown of the language, covering all of its features and various implementation details, the programmer can review the full specifications here:
-* [C4Chinese Official Documentation](https://drive.google.com/drive/folders/1CZIQtueXk7yj0555wHDrL-Sx0qK1PWTX?usp=sharing)
+* [C4Chinese Official Documentation](https://drive.google.com/file/d/1c6ozU1xNoHP2J9BehI_ZossxNFltzYir/view?usp=sharing)
 
 ---
 
