@@ -15,10 +15,10 @@ There are two ways to get C4Chinese up and running: using the pre-compiled execu
 ### Option 1: Using the Standalone Executable (Recommended)
 For the most seamless experience without the need to install any dependencies, you can use our pre-built binary. 
 
-Simply navigate to the project folder and double-click the **`IDE.exe`** file. This will instantly launch our custom IDE where you can write, compile, and debug C4Chinese.
+Simply navigate to the project folder and double-click the **`b2. IDE.exe`** file. This will instantly launch our custom IDE where you can write, compile, and debug C4Chinese.
 
 ### Option 2: Running from Source
-If you want to modify the source code, recompile the grammar, or run the project from scratch, navigate to the `/Source Code` folder and execute the following commands. This will generate the necessary lexer and parser files via ANTLR4, as well as install all required Python dependencies.
+If you want to modify the source code, recompile the grammar, or run the project from scratch, navigate to the `/c1. Interpreter Source Code` folder and execute the following commands. This will generate the necessary lexer and parser files via ANTLR4, as well as install all required Python dependencies.
 
 ```bash
 # Generate the Lexer
