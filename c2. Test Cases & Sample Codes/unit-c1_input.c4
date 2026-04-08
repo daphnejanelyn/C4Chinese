@@ -1,0 +1,23 @@
+// Test Case C1: This testcase demonstrates the capability of C4Chinese to accept inputs from the program user.
+
+hao main(){
+
+  // First, variables need to be declared to act as containers...
+  hao inputInt;
+  erhao inputFloat;
+  duopinyin inputStr;
+  zhende inputBool;
+
+  // Then, input can be received like as follows...
+  geiwo(inputInt);
+  geiwo(inputFloat);
+  geiwo(inputStr);
+  geiwo(inputBool);
+
+  geini(inputInt);
+  geini(inputFloat);
+  geini(inputStr);
+  geini(inputBool);
+
+  huijia 0;
+}

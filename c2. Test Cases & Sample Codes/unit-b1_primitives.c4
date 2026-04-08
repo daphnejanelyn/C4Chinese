@@ -1,0 +1,51 @@
+// Test Case B1: This testcase demonstrates variable declaration and assignment, as well as the various primitive datatypes...
+
+hao main(){
+
+    // Variables can be declared with a value, as shown below...
+    
+    // Integer
+    hao myInt = 4;
+    // Float
+    erhao myFloat = 4.0;
+    // Char
+    pinyin myChar = 't';
+    // String
+    duopinyin myStr = "4.0 pls";
+    // Bool
+    zhende myBool = zhen;
+
+    geini(myInt);
+    geini(myFloat);
+    geini(myChar);
+    geini(myStr);
+    geini(myBool);
+    geini("");
+
+    // Furthermore, variables can also be declared without a value,
+    // then later be assigned a value through an assignment statement.
+
+    // Integer
+    hao myInt2;
+    myInt2 = 8;
+    // Float
+    erhao myFloat2;
+    myFloat2 = 8.0;
+    // Char
+    pinyin myChar2;
+    myChar2 = 's';
+    // String
+    duopinyin myStr2;
+    myStr2 = "henlo";
+    // Bool
+    zhende myBool2;
+    myBool2 = buzhen;
+
+    geini(myInt2);
+    geini(myFloat2);
+    geini(myChar2);
+    geini(myStr2);
+    geini(myBool2);
+
+    huijia 0;
+}

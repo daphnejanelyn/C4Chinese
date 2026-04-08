@@ -1,0 +1,31 @@
+// Test Case F2: This testcase demonstrates the capability of C4Chinese to handle count-controlled loops in the form of for statements.
+
+hao main(){
+
+    // For statements can be performed with the syntax below...
+    buduan (hao ii = 0; ii < 5; ii = ii + 1) {
+        geini(ii);
+    } 
+    geini("");
+
+    // When a break statement is called in a loop, it
+    // exits the loop prematurely...
+    buduan (hao ii = 0; ii < 5; ii = ii + 1) {
+        ruguo(ii == 2){
+            ting;               // break;
+        }
+        geini(ii);
+    } 
+    geini("");
+
+    // When a continue statement is called in a loop, it
+    // skips to the next iteration immediately...
+    buduan (hao ii = 0; ii < 5; ii = ii + 1) {
+        ruguo(ii == 2){
+            buting;             // continue;
+        }
+        geini(ii);
+    } 
+
+    huijia 0;
+}

@@ -1,0 +1,70 @@
+
+hao[8] arr = {38, 27, 43, 3, 9, 82, 10, 19};
+hao[8] temp; // Temporary array used for merging
+
+gan merge(hao left, hao mid, hao right) {
+    hao i = left;
+    hao j = mid + 1;
+    hao k = left;
+
+    buduanruguo (i <= mid && j <= right) {
+        ruguo (arr[i] <= arr[j]) {
+            temp[k] = arr[i];
+            i = i + 1;
+        } xiayige {
+            temp[k] = arr[j];
+            j = j + 1;
+        }
+        k = k + 1;
+    }
+
+    buduanruguo (i <= mid) {
+        temp[k] = arr[i];
+        i = i + 1;
+        k = k + 1;
+    }
+
+    buduanruguo (j <= right) {
+        temp[k] = arr[j];
+        j = j + 1;
+        k = k + 1;
+    }
+
+    buduan (hao p = left; p <= right; p = p + 1) {
+        arr[p] = temp[p];
+    }
+}
+
+gan mergeSort(hao left, hao right) {
+    ruguo (left < right) {
+        hao mid = left + (right - left) / 2;
+
+        mergeSort(left, mid);
+        mergeSort(mid + 1, right);
+
+        merge(left, mid, right);
+    }
+}
+
+hao main() {
+    geini("=== C4Chinese Merge Sort ===");
+    geini("Unsorted Array:");
+    
+    // Print the unsorted array
+    buduan (hao i = 0; i < 8; i = i + 1) {
+        geini(arr[i]);
+    }
+
+    // Call merge sort on the full array (indexes 0 through 7)
+    mergeSort(0, 7);
+
+    geini("------------------------");
+    geini("Sorted Array:");
+    
+    // Print the sorted array
+    buduan (hao j = 0; j < 8; j = j + 1) {
+        geini(arr[j]);
+    }
+
+    huijia 0;
+}

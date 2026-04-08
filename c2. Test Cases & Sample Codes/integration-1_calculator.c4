@@ -1,0 +1,102 @@
+
+hao power(hao base, hao exp) {
+    hao result = 1;
+    
+    buduan (hao ii = 0; ii < exp; ii = ii + 1) {
+        result = result * base;
+    }
+    
+    huijia result;
+}
+
+hao main() {
+    duopinyin mode;
+    hao num1;
+    hao num2;
+    zhende running = zhen;
+
+    geini("=== C4Chinese Calculator ===");
+
+    buduanruguo (running) {
+        geini("Enter mode (add, sub, mult, div, mod, pow, exit):");
+        geiwo(mode);
+        geini("");
+
+        // 2. Check for exit condition
+        ruguo (mode == "exit") {
+            geini("Goodbye!");
+            ting;
+        }
+
+        // 2.5. Check for invalid input
+        ruguo (mode != "add" && mode != "sub" && mode != "mult" && mode != "div" && mode != "mod" && mode != "pow"){
+            geini("Invalid mode selected. Please try again.");
+            geini("");
+            geini("------------------------");
+
+            buting;
+        }
+
+        // 3. Ask for the operands
+        geini("Enter first number:");
+        geiwo(num1);
+        geini("");
+        geini("Enter second number:");
+        geiwo(num2);
+        geini("");
+
+        // 4. Perform the requested operation using if/elif/else chain
+        ruguo (mode == "add") {
+            geini("Result:");
+            geini(num1 + num2);
+            geini("");
+        }
+        xiayigeruguo (mode == "sub") { 
+            geini("Result:");
+            geini(num1 - num2);
+            geini("");
+        }
+        xiayigeruguo (mode == "mult") {
+            geini("Result:");
+            geini(num1 * num2);
+            geini("");
+        }
+        xiayigeruguo (mode == "div") {
+            // Safety check for division by zero
+            ruguo (num2 == 0) {
+                geini("Error: Cannot divide by zero!");
+                geini("");
+            }
+            xiayige {
+                geini("Result:");
+                geini(num1 / num2);
+                geini("");
+            }
+        }
+        xiayigeruguo (mode == "mod") {
+            // Safety check for modulo by zero
+            ruguo (num2 == 0) {
+                geini("Error: Cannot modulo by zero!");
+                geini("");
+            }
+            xiayige {
+                geini("Result:");
+                geini(num1 % num2);
+                geini("");
+            }
+        }
+        xiayigeruguo (mode == "pow") {
+            geini("Result:");
+            geini(power(num1, num2)); 
+            geini("");  
+        }
+        xiayige {
+            geini("Invalid mode selected. Please try again.");
+            geini("");
+        }
+
+        geini("------------------------");
+    }
+
+    huijia 0;
+}

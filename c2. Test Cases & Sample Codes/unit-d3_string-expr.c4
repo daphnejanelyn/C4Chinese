@@ -1,0 +1,21 @@
+// Test Case D3: This testcase demonstrates the capability of C4Chinese to handle string expressions through concatenations.
+
+hao main(){
+
+    duopinyin str1 = "my";
+    duopinyin str2 = "string";
+    duopinyin str3 = "is";
+    duopinyin str4 = "awesome";
+
+    // Strings can be concatenated using the addition operation...
+
+    geini(str4 + str1);
+    geini(str4 + " " + str1);
+
+    duopinyin str6 = str2 + " " + str3 + " " + str4;
+    duopinyin str5 = str2 + str3 + str4;
+    geini(str5);
+    geini(str6);
+
+    huijia 0;
+}

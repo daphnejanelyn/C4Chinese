@@ -1,0 +1,6 @@
+// Test Case A1: This is just a simple Hello World program in our C4Chinese Language.
+
+hao main(){
+  geini("Hello World in C4Chinese!");
+  huijia 0;
+}

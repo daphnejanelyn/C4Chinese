@@ -1,0 +1,37 @@
+// Test Case G2: This testcase demonstrates C4Chinese's ability to handle functions with parameters, with proper handling of scoping and multiple calls.
+
+// Functions with parameters are declared as shown below...
+hao min(int x, int y){
+    ruguo(x < y){
+        huijia x;
+    }
+    xiayige {
+        huijia y;
+    }
+}
+gan printPlusOne(hao myInt){
+    hao myInt2 = myInt + 1;
+    geini(myInt2);
+}
+
+hao main(){
+    
+    // Calling functions with parameters can be done as shown below...
+    hao z = min(3, 6);
+    geini(z);
+
+    // If a function is called multiple times, their parameters are
+    // appropriately set to the new values...
+    hao a = min(4, 2);
+    geini(a);
+
+    // Lastly, the function call has its own scope, so no conflicts will
+    // arise if the calling scope has the same variable identfiers
+    // as the callee scope...
+    hao myInt = 1;
+    hao myInt2 = myInt + 3;
+    printPlusOne(6);
+    geini(myInt2);
+
+    huijia 0;
+}

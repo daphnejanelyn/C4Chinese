@@ -10,7 +10,15 @@ For a comprehensive breakdown of the language, covering all of its features and 
 
 ## Getting Started
 
-To get C4Chinese up and running, navigate to the provided project folder and execute the following commands. This will generate the necessary lexer and parser files via ANTLR4, as well as install all required Python dependencies.
+There are two ways to get C4Chinese up and running: using the pre-compiled executable for a quick start, or building it directly from the source code for development and debugging.
+
+### Option 1: Using the Standalone Executable (Recommended)
+For the most seamless experience without the need to install any dependencies, you can use our pre-built binary. 
+
+Simply navigate to the project folder and double-click the **`IDE.exe`** file. This will instantly launch our custom IDE where you can write, compile, and debug C4Chinese.
+
+### Option 2: Running from Source
+If you want to modify the source code, recompile the grammar, or run the project from scratch, navigate to the `/Source Code` folder and execute the following commands. This will generate the necessary lexer and parser files via ANTLR4, as well as install all required Python dependencies.
 
 ```bash
 # Generate the Lexer
@@ -22,12 +30,10 @@ antlr4.jar -Dlanguage=Python3 -visitor -no-listener C4ChineseParser.g4
 # Install required dependencies
 pip install -r requirements.txt
 ```
+*(Note: Depending on your system setup, you might need to run the jar files using: `java antlr4.jar ...`)*
 
-(Note: Depending on your system setup, you might need to run the jar files using: 
-java antlr4.jar ...)
-
-To make writing, compiling, and debugging C4Chinese a more seamless experience, we've built a custom IDE. You can launch it by running the following command:
-```
+Once everything is set up, you can launch the custom IDE by running the following command:
+```bash
 python IDE.py
 ```
 

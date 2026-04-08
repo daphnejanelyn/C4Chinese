@@ -1,0 +1,101 @@
+号 power(号 base, 号 exp) {
+    号 result 是 1;
+    
+    不断 (号 ii 是 0; ii 小 exp; ii 是 ii 加 1) {
+        result 是 result 多加 base;
+    }
+    
+    回家 result;
+}
+
+号 主要() {
+    多拼音 mode;
+    号 num1;
+    号 num2;
+    真的 running 是 真;
+
+    给你("=== C4Chinese Calculator ===");
+
+    不断如果 (running) {
+        给你("Enter mode (add, sub, mult, div, mod, pow, exit):");
+        给我(mode);
+        给你("");
+
+        // 2. Check for exit condition
+        如果 (mode 这个 "exit") {
+            给你("Goodbye!");
+            停;
+        }
+
+        // 2.5. Check for invalid input
+        如果 (mode 不这个 "add" 和 mode 不这个 "sub" 和 mode 不这个 "mult" 和 mode 不这个 "div" 和 mode 不这个 "mod" 和 mode 不这个 "pow"){
+            给你("Invalid mode selected. Please try again.");
+            给你("");
+            给你("------------------------");
+
+            不停;
+        }
+
+        // 3. Ask for the operands
+        给你("Enter first number:");
+        给我(num1);
+        给你("");
+        给你("Enter second number:");
+        给我(num2);
+        给你("");
+
+        // 4. Perform the requested operation using if/elif/else chain
+        如果 (mode 这个 "add") {
+            给你("Result:");
+            给你(num1 加 num2);
+            给你("");
+        }
+        下一个如果 (mode 这个 "sub") { 
+            给你("Result:");
+            给你(num1 负 num2);
+            给你("");
+        }
+        下一个如果 (mode 这个 "mult") {
+            给你("Result:");
+            给你(num1 多加 num2);
+            给你("");
+        }
+        下一个如果 (mode 这个 "div") {
+            // Safety check for division by zero
+            如果 (num2 这个 0) {
+                给你("Error: Cannot divide by zero!");
+                给你("");
+            }
+            下一个 {
+                给你("Result:");
+                给你(num1 多负 num2);
+                给你("");
+            }
+        }
+        下一个如果 (mode 这个 "mod") {
+            // Safety check for modulo by zero
+            如果 (num2 这个 0) {
+                给你("Error: Cannot modulo by zero!");
+                给你("");
+            }
+            下一个 {
+                给你("Result:");
+                给你(num1 下来 num2);
+                给你("");
+            }
+        }
+        下一个如果 (mode 这个 "pow") {
+            给你("Result:");
+            给你(power(num1, num2)); 
+            给你("");  
+        }
+        下一个 {
+            给你("Invalid mode selected. Please try again.");
+            给你("");
+        }
+
+        给你("------------------------");
+    }
+
+    回家 0;
+}

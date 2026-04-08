@@ -1,0 +1,69 @@
+號[8] arr 是 {38, 27, 43, 3, 9, 82, 10, 19};
+號[8] temp; // Temporary array used for merging
+
+乾 merge(號 left, 號 mid, 號 right) {
+    號 i 是 left;
+    號 j 是 mid 加 1;
+    號 k 是 left;
+
+    不斷如果 (i 小這個 mid 和 j 小這個 right) {
+        如果 (arr[i] 小這個 arr[j]) {
+            temp[k] 是 arr[i];
+            i 是 i 加 1;
+        } 下一個 {
+            temp[k] 是 arr[j];
+            j 是 j 加 1;
+        }
+        k 是 k 加 1;
+    }
+
+    不斷如果 (i 小這個 mid) {
+        temp[k] 是 arr[i];
+        i 是 i 加 1;
+        k 是 k 加 1;
+    }
+
+    不斷如果 (j 小這個 right) {
+        temp[k] 是 arr[j];
+        j 是 j 加 1;
+        k 是 k 加 1;
+    }
+
+    不斷 (號 p 是 left; p 小這個 right; p 是 p 加 1) {
+        arr[p] 是 temp[p];
+    }
+}
+
+乾 mergeSort(號 left, 號 right) {
+    如果 (left 小 right) {
+        號 mid 是 left 加 (right 負 left) 多負 2;
+
+        mergeSort(left, mid);
+        mergeSort(mid 加 1, right);
+
+        merge(left, mid, right);
+    }
+}
+
+號 主要() {
+    給你("=== C4Chinese Merge Sort ===");
+    給你("Unsorted Array:");
+    
+    // Print the unsorted array
+    不斷 (號 i 是 0; i 小 8; i 是 i 加 1) {
+        給你(arr[i]);
+    }
+
+    // Call merge sort on the full array (indexes 0 through 7)
+    mergeSort(0, 7);
+
+    給你("------------------------");
+    給你("Sorted Array:");
+    
+    // Print the sorted array
+    不斷 (號 j 是 0; j 小 8; j 是 j 加 1) {
+        給你(arr[j]);
+    }
+
+    回家 0;
+}

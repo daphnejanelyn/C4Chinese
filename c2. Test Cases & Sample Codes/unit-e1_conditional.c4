@@ -1,0 +1,27 @@
+// Test Case E1: This testcase demonstrates the capability of C4Chinese to handle conditional statements.
+
+hao main(){
+
+    hao x;
+    geiwo(x);
+
+    // If statements can be done as follows...
+    ruguo (x % 4 == 0){
+        geini("Remainder of 0!");
+    }
+
+    // Elif statements can be done as follows...
+    xiayigeruguo (x % 4 == 1) {
+        geini("Remainder of 1!");
+    }
+    xiayigeruguo (x % 4 == 2) {
+        geini("Remainder of 2!");
+    }
+
+    // Else statements can be done as follows...
+    xiayige {
+        geini("Remainder of 3!");
+    }
+
+    huijia 0;
+}

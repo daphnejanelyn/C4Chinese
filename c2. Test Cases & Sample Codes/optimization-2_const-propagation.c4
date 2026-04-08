@@ -1,0 +1,8 @@
+
+hao main(){
+  yongyuan hao myConst = 8;
+  hao myVar = myConst;
+  geini(myVar);
+
+  huijia 2;
+}

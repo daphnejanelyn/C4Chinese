@@ -1,0 +1,35 @@
+// Test Case F3: This testcase demonstrates the capability of C4Chinese to handle repeat-until loops.
+
+hao main(){
+
+    hao counter;
+
+    counter = 0;
+    laiyibian {                         // repeat
+        counter = counter + 1;
+        geini(counter);
+    } dao (counter == 4);               // until (counter == 4) 
+    geini("");
+
+    counter = 0;
+    laiyibian {                         // repeat
+        counter = counter + 1;
+        ruguo(counter == 3){
+            ting;                       // break;
+        }
+        geini(counter);
+    } dao (counter == 4);               // until (counter == 4) 
+    geini("");
+
+
+    counter = 0;
+    laiyibian {                         // repeat
+        counter = counter + 1;
+        ruguo(counter == 2){
+            buting;                     // continue
+        }
+        geini(counter);
+    } dao (counter == 4);               // until (counter == 4) 
+
+    huijia 0;
+}
