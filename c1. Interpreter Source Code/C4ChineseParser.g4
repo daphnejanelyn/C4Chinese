@@ -120,7 +120,7 @@ ifStat
     ;
 
 elifList
-    : ELIF LPAR expression RPAR statement elifList
+    : ELIF LPAR expression RPAR statement elifList?
     | ELSE statement
     ;
 
